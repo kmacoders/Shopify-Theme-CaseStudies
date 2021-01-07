@@ -1,0 +1,23 @@
+.product-item__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // Set width of label
+  max-width: 90px;
+  
+  // Important
+  display: inline-block;
+  vertical-align: middle;
+
+  @include responsive(576px) {
+    max-width: 120px;
+  }
+
+  @include responsive(768px) {
+    max-width: 200px;
+  }
+
+  @include responsive(1200px) {
+    max-width: 250px;
+  }
+}

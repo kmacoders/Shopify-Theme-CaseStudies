@@ -1,0 +1,6 @@
+<!-- Get total product inventory of each variant  -->
+
+{% assign product_quantity = 0 %}
+{% for variant in product.variants %}
+  {% assign product_quantity = variant.inventory_quantity | plus: product_quantity %}
+{% endfor %}

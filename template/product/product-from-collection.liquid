@@ -1,0 +1,86 @@
+<!-- Get all products from one collection  -->
+<!-- Get all collection from block settings  -->
+
+<div class="xo-shoppage-01 bootstrap-wrapper">
+  <div class="xo-shoppage-title">
+      <div class="xo-shoppage-title__title xo-title--uppercase xo-title--italic">{{section.settings.title}}</div>
+      <div class="xo-shoppage-title__subtitle">{{section.settings.subtitle}}</div>
+  </div>
+
+  <div class="xo-products-container container-fluid">
+    <div class="container">
+      {% for block in section.blocks %}
+        <div class="row">
+            {%- assign collection =  collections[block.settings.collection] -%}
+            {%- assign listProducts =  collection.products -%}
+
+            {% for product in listProducts %}
+              <a href="/products/{{ product.handle }}"  class="product-item swiper-slide col-6 col-md-6 col-lg-4 col-xl-4">
+                <div class="product-item__image">
+                  <img src="{{ product.featured_image | img_url: '1024x', crop: 'center' }}" alt="{{}}">
+                </div>
+
+                <div class="product-item__description">
+                  <div class="product-item__title">{{ product.title }}</div>
+                  <div class="product-item__price">{{ product.price | money }}</div>
+                </div>
+              </a>
+            {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+{% schema %}
+   {
+    "name": "Products List",
+    "settings": [
+        {
+          "type": "header",
+          "content": "Page title"
+        },
+	{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+ 	  "default": "Currently Available"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+	      "default": "World-Renowed Art"
+        }
+	],
+	"blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+		  {
+            "type": "header",
+            "content": "Page title"
+          },
+          {
+            "type": "text",
+            "id": "room_name",
+            "label": "Title",
+            "default": "Career"
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Select collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
