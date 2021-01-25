@@ -1,0 +1,35 @@
+{%- form 'localization', id: 'localization_form_footer', class: 'Footer__LocalizationForm' -%}
+
+<div class="Footer__LocalizationItem">
+  <input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}">
+  <span class="u-visually-hidden">{{ 'footer.general.locale' | t }}</span>
+
+  <button type="button" class="SelectButton Link Link--primary u-h8" aria-haspopup="true" aria-expanded="false"
+    aria-controls="footer-locale-popover">
+    {{- form.current_locale.endonym_name -}}
+    {%- render 'icon', icon: 'select-arrow' -%}
+  </button>
+
+  <div id="footer-locale-popover" class="Popover Popover--small Popover--noWrap" aria-hidden="true">
+    <header class="Popover__Header">
+      <button type="button" class="Popover__Close Icon-Wrapper--clickable" data-action="close-popover">{% render 'icon'
+        with 'close' %}</button>
+      <span class="Popover__Title Heading u-h4">{{ 'footer.general.locale' | t }}</span>
+    </header>
+
+    <div class="Popover__Content">
+      <div class="Popover__ValueList Popover__ValueList--center" data-scrollable>
+        {%- for locale in form.available_locales -%}
+        <button type="submit" name="locale_code"
+          class="Popover__Value {% if locale.iso_code == form.current_locale.iso_code %}is-selected{% endif %} Heading Link Link--primary u-h6"
+          value="{{ locale.iso_code }}" {% if locale.iso_code==form.current_locale.iso_code %}aria-current="true" {%
+          endif %}>
+          {{- locale.endonym_name -}}
+        </button>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  
+</div>
+{%- endform -%}
